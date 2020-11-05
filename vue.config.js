@@ -2,7 +2,7 @@ module.exports = {
     //...
     configureWebpack: {
       devServer: {
-        host: '127.0.0.1'
+        host: 'localhost'
       }
     }
   };
