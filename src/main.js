@@ -1,52 +1,27 @@
 import { createApp } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createStore } from 'vuex'
 
 import App from './App.vue';
-import TeamsList from './components/teams/TeamsList.vue';
-import UsersList from './components/users/UsersList.vue';
-import TeamMembers from './components/teams/TeamMembers.vue';
-import NotFound from './components/nav/NotFound.vue';
-import TeamsFooter from './components/teams/TeamsFooter.vue';
-import UsersFooter from './components/users/UsersFooter.vue';
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    { path: '/', redirect: '/teams' },
-    {
-      name: 'teams',
-      path: '/teams',
-      components: { default: TeamsList, footer: TeamsFooter },
-      children: [
-        {
-          name: 'team-members',
-          path: ':teamId',
-          component: TeamMembers,
-          props: true
-        } // /teams/t1
-      ]
-    }, // our-domain.com/teams => TeamsList
-    {
-      path: '/users',
-      components: {
-        default: UsersList,
-        footer: UsersFooter
-      }
+const store = createStore({
+    state() {
+        return {
+            counter: 0
+        };
     },
-    { path: '/:notFound(.*)', component: NotFound }
-  ],
-  linkActiveClass: 'active',
-  scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition);
-    if (savedPosition) {
-      return savedPosition;
+    mutations: {
+        increment(state) {
+            state.counter = state.counter + 2;
+        },
+        increase(state, payload){
+            state.counter = state.counter + payload.value;
+        }
     }
-    return { left: 0, top: 0 };
-  }
+
 });
 
 const app = createApp(App);
 
-app.use(router);
+app.use(store);
 
 app.mount('#app');
