@@ -1,27 +1,15 @@
 import { createApp } from 'vue';
-import { createStore } from 'vuex'
 
+import router from './router.js';
+import store from './store/index.js'
 import App from './App.vue';
+import BaseBadge from './components/ui/BaseBadge.vue';
 
-const store = createStore({
-    state() {
-        return {
-            counter: 0
-        };
-    },
-    mutations: {
-        increment(state) {
-            state.counter = state.counter + 2;
-        },
-        increase(state, payload){
-            state.counter = state.counter + payload.value;
-        }
-    }
+const app = createApp(App)
 
-});
-
-const app = createApp(App);
-
+app.use(router);
 app.use(store);
+
+app.component('base-badge', BaseBadge);
 
 app.mount('#app');

@@ -1,30 +1,14 @@
 <template>
-  <base-container title="Vuex">
-    <the-counter></the-counter>
-    <button @click="addOne">Add 10</button>
-    <change-counter></change-counter>
-  </base-container>
+  <the-header></the-header>
+  <router-view></router-view>
 </template>
 
 <script>
-import BaseContainer from './components/BaseContainer.vue';
-import TheCounter from './components/TheCounter.vue';
-import ChangeCounter from './components/ChangeCounter.vue';
+import TheHeader from './components/nav/TheHeader.vue';
 
 export default {
   components: {
-    BaseContainer,
-    TheCounter,
-    ChangeCounter
-  },
-  methods: {
-    addOne() {
-     // this.$store.commit('increase', {value: 10});
-     this.$store.commit({
-       type: 'increase',
-       value: 10
-     });
-    }
+    TheHeader
   }
 };
 </script>
